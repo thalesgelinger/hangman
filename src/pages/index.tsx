@@ -1,5 +1,8 @@
+import axios from "axios";
+import QRCode from "qrcode";
 import styles from "../styles/pages/Home.module.scss";
-export default function Home() {
+
+export default function Home({ hash, qrCodeUrl }) {
   return (
     <div className={styles.homeContainer}>
       <h1>Jogo da forca</h1>
@@ -16,10 +19,22 @@ export default function Home() {
             </span>
           </article>
 
-          <a href="">http://hangman.vercel.com/asdf</a>
-          <img src="QR-placeholder.png" alt="QR code" />
+          <a
+            href={`http://localhost:3000/word/${hash}`}
+          >{`http://localhost:3000/word/${hash}`}</a>
+          <img src={qrCodeUrl} alt="QR code" />
         </aside>
       </main>
     </div>
   );
+}
+
+export async function getStaticProps(context) {
+  const hash = Math.random().toString(36).substring(7);
+  const qrCodeUrl = await QRCode.toDataURL(
+    `http://localhost:3000/word/${hash}`
+  );
+  return {
+    props: { hash, qrCodeUrl },
+  };
 }

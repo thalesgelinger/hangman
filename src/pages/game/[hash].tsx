@@ -1,5 +1,5 @@
-import styles from "../styles/pages/Game.module.scss";
-import { Alphabet } from "../components";
+import styles from "../../styles/pages/Game.module.scss";
+import { Alphabet } from "../../components";
 import { useState } from "react";
 
 const WORD = [..."batata"];
@@ -17,7 +17,7 @@ export default function Game() {
     <div className={styles.gameContainer}>
       <main>
         <div>
-          <img src="hangman.png" alt="hangman" />
+          <img src="../hangman.png" alt="hangman" />
         </div>
         <div>
           {word.map((letter, key) => (

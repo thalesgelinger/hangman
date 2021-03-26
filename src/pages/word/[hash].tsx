@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "../styles/pages/Word.module.scss";
+import styles from "../../styles/pages/Word.module.scss";
 
 export default function Word() {
   const [word, setWord] = useState("");
