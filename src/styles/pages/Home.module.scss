@@ -1,0 +1,67 @@
+@import "../_variables";
+
+.homeContainer {
+  background: $green;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  color: $text;
+
+  h1 {
+    margin: 20px 0;
+    font-weight: bold;
+    font-size: 7.5rem;
+  }
+
+  main {
+    flex: 1;
+    display: flex;
+    width: 100%;
+
+    aside {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      &:nth-child(1) {
+        justify-content: flex-end;
+
+        img {
+          width: 60%;
+        }
+      }
+
+      &:nth-child(2) {
+        justify-content: space-around;
+        align-items: center;
+
+        img {
+          width: 350px;
+          height: 350px;
+        }
+      }
+    }
+  }
+
+  article {
+    width: 100%;
+    text-align: center;
+
+    h2 {
+      font-size: 3rem;
+    }
+
+    span {
+      font-size: 1.5rem;
+    }
+
+    a {
+      text-decoration: none;
+      font-size: 1.7rem;
+    }
+  }
+}

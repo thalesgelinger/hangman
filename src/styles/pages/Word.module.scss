@@ -1,0 +1,54 @@
+@import "../_variables";
+
+.wordContainer {
+  background: $dark-blue;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    font-size: 7rem;
+    color: $white;
+    margin-bottom: 5rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 700px;
+
+    input {
+      background: inherit;
+      height: 7rem;
+      border-radius: 8px;
+      outline: none;
+      border: 2px solid $white;
+      padding: 0 20px;
+      font-size: 4rem;
+      color: $white;
+      &::placeholder {
+        color: $white;
+        opacity: 0.8;
+      }
+    }
+
+    button {
+      background: $green;
+      outline: none;
+      border: none;
+      border-radius: 8px;
+      margin-top: 2rem;
+      height: 7rem;
+      color: $white;
+      font-size: 4rem;
+      cursor: pointer;
+      transition: opacity 0.2s;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+}
