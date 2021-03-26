@@ -17,7 +17,8 @@ export default function Home({ hash, qrCodeUrl }) {
 
       socket.on(`word-${hash}`, ({ word }) => {
         socket.disconnect();
-        router.push({ pathname: `/game/${hash}`, query: { word } });
+        localStorage.setItem("word", word);
+        router.push({ pathname: `/game/${hash}` });
       });
     }
 
