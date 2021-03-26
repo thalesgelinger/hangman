@@ -1,8 +1,33 @@
+import { useEffect } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 import QRCode from "qrcode";
+import { io } from "socket.io-client";
 import styles from "../styles/pages/Home.module.scss";
 
 export default function Home({ hash, qrCodeUrl }) {
+  const router = useRouter();
+
+  useEffect(() => {
+    const socket = io();
+    function connectSocket() {
+      socket.on("connect", () => {
+        socket.emit("hash", hash);
+      });
+
+      socket.on(`word-${hash}`, ({ word }) => {
+        socket.disconnect();
+        router.push({ pathname: `/game/${hash}`, query: { word } });
+      });
+    }
+
+    axios.post(`/api/word/${hash}`).finally(connectSocket);
+
+    return () => {
+      socket.disconnect();
+    };
+  });
+
   return (
     <div className={styles.homeContainer}>
       <h1>Jogo da forca</h1>

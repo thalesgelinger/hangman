@@ -1,11 +1,12 @@
 import styles from "../../styles/pages/Game.module.scss";
 import { Alphabet } from "../../components";
 import { useState } from "react";
-
-const WORD = [..."batata"];
+import { useRouter } from "next/router";
 
 export default function Game() {
-  const word = WORD;
+  const router = useRouter();
+
+  const word = [...router.query.word];
 
   const [selectedLetters, setSelectedLetters] = useState([]);
 
