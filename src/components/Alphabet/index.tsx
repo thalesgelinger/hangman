@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "../../styles/components/Alphabet.module.scss";
 
 export function Alphabet({ setSelectedLetter }) {
-  const alphabet = [..."abcdefghijklmnopqrstuvwxyz"];
+  const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
   const [disabledLetters, setDisabledLetters] = useState([]);
 
   function handleSelectedLetter(letter) {

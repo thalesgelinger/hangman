@@ -1,10 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { io } from "socket.io-client";
 import styles from "../../styles/pages/Word.module.scss";
-
-let socket;
 
 export default function Word() {
   const [word, setWord] = useState("");
@@ -13,25 +10,14 @@ export default function Word() {
 
   const { hash } = router.query;
 
-  useEffect(() => {
-    socket = io();
-  }, []);
-
   function handleWord(e) {
     setWord(e.target.value);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    function connectSocketAndEmitWord() {
-      socket.on("connect", () => {
-        socket.emit("set-word", { word, hash });
-        socket.disconnect();
-      });
-    }
-
-    axios.post(`/api/word/${hash}`).finally(connectSocketAndEmitWord);
+    axios.post(`/api/word/${hash}`, { word });
+    window.close();
   }
 
   return (

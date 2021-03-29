@@ -1,38 +1,20 @@
-import { Server } from "socket.io";
+let word = "";
 
-function getWord(req, res) {
+function chooseWord(req, res) {
   const methods = {
+    GET() {
+      if (!word) {
+        res.status(404).json({ message: "There's no word available" });
+      }
+      res.json({ word });
+    },
     POST() {
-      console.log("*First use, starting socket.io");
-
-      const io = new Server(res.socket.server);
-
-      io.on("connection", (socket) => {
-        socket.broadcast.emit("a user connected");
-
-        socket.on("hash", (hash) => {
-          console.log(`Someone has connected with hash: ${hash}`);
-        });
-
-        socket.on("set-word", ({ word, hash }) => {
-          console.log("received word:", word);
-
-          socket.broadcast.emit(`word-${hash}`, { word });
-        });
-      });
-      res.end();
+      word = req.body.word;
     },
   };
 
-  const fn = methods[req.method];
-
-  if (fn) fn();
+  const method = methods[req.method];
+  if (method) method();
 }
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
-export default getWord;
+export default chooseWord;

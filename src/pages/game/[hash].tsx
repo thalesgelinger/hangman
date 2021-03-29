@@ -1,9 +1,12 @@
 import styles from "../../styles/pages/Game.module.scss";
-import { Alphabet } from "../../components";
-import { useState } from "react";
+import { Alphabet, Hangman } from "../../components";
+import { useEffect, useState } from "react";
 
 export default function Game() {
-  const word = localStorage.getItem("word").split("");
+  // const word = localStorage.getItem("word").toLocaleLowerCase().split("");
+  const word = "batata".split("");
+
+  let draw = () => {};
 
   const [selectedLetters, setSelectedLetters] = useState([]);
 
@@ -11,11 +14,15 @@ export default function Game() {
     setSelectedLetters([...selectedLetters, letter]);
   }
 
+  function handleDraw(drawFunction) {
+    draw = drawFunction;
+  }
+
   return (
     <div className={styles.gameContainer}>
       <main>
         <div>
-          <img src="../hangman.png" alt="hangman" />
+          <Hangman draw={handleDraw} />
         </div>
         <div>
           {word.map((letter, key) => (

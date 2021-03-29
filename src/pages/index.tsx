@@ -2,31 +2,25 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import QRCode from "qrcode";
-import { io } from "socket.io-client";
 import styles from "../styles/pages/Home.module.scss";
 
 export default function Home({ hash, qrCodeUrl }) {
   const router = useRouter();
 
   useEffect(() => {
-    const socket = io();
-    function connectSocket() {
-      socket.on("connect", () => {
-        socket.emit("hash", hash);
-      });
-
-      socket.on(`word-${hash}`, ({ word }) => {
-        socket.disconnect();
+    async function choosenWord() {
+      try {
+        const {
+          data: { word },
+        } = await axios.get(`/api/word/${hash}`);
         localStorage.setItem("word", word);
         router.push({ pathname: `/game/${hash}` });
-      });
+      } catch (e) {
+        setTimeout(choosenWord, 2000);
+      }
     }
 
-    axios.post(`/api/word/${hash}`).finally(connectSocket);
-
-    return () => {
-      socket.disconnect();
-    };
+    choosenWord();
   });
 
   return (
