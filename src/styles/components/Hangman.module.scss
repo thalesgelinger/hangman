@@ -1,0 +1,23 @@
+@import "../_variables";
+
+.hangmanContainer {
+  height: 85%;
+
+  circle {
+    fill: $dark-blue;
+    stroke-dasharray: 408;
+    stroke-dashoffset: 0;
+    transform: rotate(-90deg);
+    transform-origin: center;
+    animation: draw-head 1s;
+  }
+
+  @keyframes draw-head {
+    from {
+      stroke-dashoffset: 251;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+}
