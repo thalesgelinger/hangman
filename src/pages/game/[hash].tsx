@@ -2,12 +2,10 @@ import styles from "../../styles/pages/Game.module.scss";
 import { Alphabet, Hangman, GameOverModal } from "../../components";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { GetServerSideProps } from "next";
 
-export default function Game() {
+export default function Game({ word }) {
   const router = useRouter();
-
-  // const word = localStorage.getItem("word").toLocaleLowerCase().split("");
-  const word = "batata".split("");
 
   const [selectedLetters, setSelectedLetters] = useState([]);
   const [draw, setDraw] = useState(null);
@@ -60,3 +58,11 @@ export default function Game() {
     </div>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const word = req.cookies.word.split("");
+
+  return {
+    props: { word },
+  };
+};

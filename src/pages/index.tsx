@@ -3,6 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import QRCode from "qrcode";
 import styles from "../styles/pages/Home.module.scss";
+import Cookies from "js-cookie";
 
 export default function Home({ hash, qrCodeUrl }) {
   const router = useRouter();
@@ -14,7 +15,7 @@ export default function Home({ hash, qrCodeUrl }) {
           data: { word },
         } = await axios.get(`/api/word/${hash}`);
 
-        localStorage.setItem("word", word);
+        Cookies.set("word", word);
         router.push(`/game/${hash}`);
       } catch (e) {
         setTimeout(choosenWord, 2000);

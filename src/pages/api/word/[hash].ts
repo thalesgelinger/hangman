@@ -7,6 +7,7 @@ function chooseWord(req, res) {
         res.status(404).json({ message: "There's no word available" });
       }
       res.json({ word });
+      word = "";
     },
     POST() {
       word = req.body.word;
