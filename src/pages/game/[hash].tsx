@@ -6,16 +6,19 @@ export default function Game() {
   // const word = localStorage.getItem("word").toLocaleLowerCase().split("");
   const word = "batata".split("");
 
-  let draw = () => {};
-
   const [selectedLetters, setSelectedLetters] = useState([]);
+  const [draw, setDraw] = useState(null);
 
   function handleSelectedLetter(letter) {
+    if (!word.includes(letter)) {
+      draw();
+    }
+
     setSelectedLetters([...selectedLetters, letter]);
   }
 
   function handleDraw(drawFunction) {
-    draw = drawFunction;
+    setDraw(() => drawFunction);
   }
 
   return (

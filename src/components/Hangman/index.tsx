@@ -60,16 +60,19 @@ export function Hangman({ draw }) {
   const [bodyParts, setBodyParts] = useState([]);
 
   useEffect(() => {
+    function* drawBodyParts() {
+      for (let i = 0; i < BODY_PARTS.length; i++) {
+        console.log(bodyParts);
+
+        setBodyParts([...bodyParts, BODY_PARTS[i]]);
+        yield null;
+      }
+    }
+
     const generateBody = drawBodyParts();
 
     draw(() => generateBody.next());
   }, []);
-
-  function* drawBodyParts() {
-    for (let i = 0; i < BODY_PARTS.length; i++) {
-      yield setBodyParts([...bodyParts, BODY_PARTS[i]]);
-    }
-  }
 
   return (
     <svg viewBox="0 0 500 700" className={styles.hangmanContainer}>
