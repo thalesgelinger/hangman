@@ -10,6 +10,7 @@ export function Hangman({ draw }) {
   const BODY_PARTS = [
     <circle
       className="head"
+      key={0}
       r="65"
       cx="80%"
       cy="75%"
@@ -17,6 +18,7 @@ export function Hangman({ draw }) {
     ></circle>,
     <line
       className="body"
+      key={1}
       x1="85%"
       y1="265"
       x2="85%"
@@ -25,6 +27,7 @@ export function Hangman({ draw }) {
     ></line>,
     <line
       className="left-arm"
+      key={2}
       x1="85%"
       y1="280"
       x2="95%"
@@ -33,6 +36,7 @@ export function Hangman({ draw }) {
     ></line>,
     <line
       className="right-arm"
+      key={3}
       x1="85%"
       y1="280"
       x2="75%"
@@ -41,6 +45,7 @@ export function Hangman({ draw }) {
     ></line>,
     <line
       className="left-leg"
+      key={4}
       x1="85%"
       y1="465"
       x2="95%"
@@ -49,6 +54,7 @@ export function Hangman({ draw }) {
     ></line>,
     <line
       className="right-leg"
+      key={5}
       x1="85%"
       y1="465"
       x2="75%"
@@ -60,19 +66,17 @@ export function Hangman({ draw }) {
   const [bodyParts, setBodyParts] = useState([]);
 
   useEffect(() => {
-    function* drawBodyParts() {
-      for (let i = 0; i < BODY_PARTS.length; i++) {
-        console.log(bodyParts);
-
-        setBodyParts([...bodyParts, BODY_PARTS[i]]);
-        yield null;
-      }
-    }
-
     const generateBody = drawBodyParts();
 
     draw(() => generateBody.next());
   }, []);
+
+  function* drawBodyParts() {
+    for (let i = 0; i < BODY_PARTS.length; i++) {
+      bodyParts.push(BODY_PARTS[i]);
+      yield setBodyParts(bodyParts);
+    }
+  }
 
   return (
     <svg viewBox="0 0 500 700" className={styles.hangmanContainer}>

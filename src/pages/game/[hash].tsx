@@ -11,7 +11,8 @@ export default function Game() {
 
   function handleSelectedLetter(letter) {
     if (!word.includes(letter)) {
-      draw();
+      const { done } = draw();
+      console.log({ done });
     }
 
     setSelectedLetters([...selectedLetters, letter]);

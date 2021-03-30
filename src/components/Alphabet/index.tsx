@@ -15,7 +15,7 @@ export function Alphabet({ setSelectedLetter }) {
   return (
     <div className={styles.alphabetContainer}>
       {alphabet.map((letter) => (
-        <>
+        <div key={letter}>
           <input
             type="checkbox"
             id={`letter${letter}`}
@@ -23,7 +23,7 @@ export function Alphabet({ setSelectedLetter }) {
             onClick={handleSelectedLetter(letter)}
           />
           <label htmlFor={`letter${letter}`}>{letter}</label>
-        </>
+        </div>
       ))}
     </div>
   );
