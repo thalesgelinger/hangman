@@ -1,0 +1,35 @@
+@import "../_variables";
+
+.gameOverModalContainer {
+  background: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    color: $white;
+    font-size: 3rem;
+  }
+
+  button {
+    background: $green;
+    outline: none;
+    border: none;
+    border-radius: 8px;
+    margin-top: 2rem;
+    color: $white;
+    font-size: 3rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    padding: 10px 20px;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}

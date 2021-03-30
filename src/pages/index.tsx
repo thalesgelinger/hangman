@@ -13,15 +13,16 @@ export default function Home({ hash, qrCodeUrl }) {
         const {
           data: { word },
         } = await axios.get(`/api/word/${hash}`);
+
         localStorage.setItem("word", word);
-        router.push({ pathname: `/game/${hash}` });
+        router.push(`/game/${hash}`);
       } catch (e) {
         setTimeout(choosenWord, 2000);
       }
     }
 
     choosenWord();
-  });
+  }, []);
 
   return (
     <div className={styles.homeContainer}>
